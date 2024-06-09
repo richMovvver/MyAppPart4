@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MyAppPart3</string>
+    <string name="calculate">Расчитать</string>
+    <string name="settings">Настройки</string>
+    <string name="enter_data">"Введите название "</string>
+    <string name="save">Сохранить\n</string>
+    <string name="cancel">Отмена</string>
+    <string name="add_item">Название</string>
+</resources>
