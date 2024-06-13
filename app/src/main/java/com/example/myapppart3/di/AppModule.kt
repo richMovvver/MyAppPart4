@@ -23,8 +23,8 @@ object AppModule {
         return Room.databaseBuilder(
             context,
             AppDatabase::class.java,
-            "user_database1"
-        ).allowMainThreadQueries().build()
+            "user_database2"
+        ).build()
     }
 
     @Provides
