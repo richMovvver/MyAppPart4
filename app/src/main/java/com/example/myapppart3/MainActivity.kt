@@ -18,42 +18,29 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Инициализация ViewModel
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
-        // Настройка RecyclerView
-        itemAdapter = ItemAdapter(viewModel.items) // Передаем список айтемов из ViewModel
+        // Создаем адаптер для RecyclerView
+        itemAdapter = ItemAdapter(emptyList()) // Создаем адаптер с пустым списком
+
+        // Настраиваем RecyclerView
         binding.itemList.layoutManager = LinearLayoutManager(this)
         binding.itemList.adapter = itemAdapter
 
-        // Обработка нажатия на кнопку "Добавить"
-        binding.addButton.setOnClickListener {
-            showInputDialog()
-        }
-
-        // Обработка нажатий на элементы нижней навигации (TODO: реализовать)
-        binding.bottomNavigation.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.calculate_fragment -> {
-                    // Переключение на фрагмент "Расчитать"
-                    true
-                }
-                R.id.settings_fragment -> {
-                    // Переключение на фрагмент "Настройки"
-                    true
-                }
-                else -> false
-            }
-        }
-
-        // Наблюдение за изменениями списка айтемов в ViewModel (TODO: реализовать в ViewModel)
+        // Наблюдаем за itemsLiveData в ViewModel
         viewModel.itemsLiveData.observe(this) { items ->
+            // Обновляем список айтемов в адаптере
             itemAdapter.items = items
             itemAdapter.notifyDataSetChanged()
         }
+
+        // Обработка клика на Button для добавления нового айтема
+        binding.addButton.setOnClickListener {
+            showInputDialog()
+        }
     }
 
-    // Отображение диалога ввода
+    // Показ диалога для ввода нового айтема
     private fun showInputDialog() {
         val inputDialog = InputDialog(this)
         inputDialog.show { inputText ->
