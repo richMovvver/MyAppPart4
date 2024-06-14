@@ -16,5 +16,11 @@ class UserRepository(private val userDao: UserDao) {
         }
     }
 
+    suspend fun updateUser(user: User) {
+        withContext(Dispatchers.IO) {
+            userDao.updateUser(user)
+        }
+    }
+
 
 }

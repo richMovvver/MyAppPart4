@@ -23,7 +23,7 @@ object AppModule {
         return Room.databaseBuilder(
             context,
             AppDatabase::class.java,
-            "user_database2"
+            "user_database3"
         ).build()
     }
 
@@ -37,8 +37,8 @@ object AppModule {
         return UserRepository(userDao)
     }
 
-    @Provides // Добавлен @Provides
+    @Provides
     fun provideItemAdapter(): ItemAdapter {
-        return ItemAdapter(emptyList()) // Создаем ItemAdapter с пустым списком
+        return ItemAdapter(emptyList(), onUserCheckedChangeListener = { _, _ ->  })
     }
 }

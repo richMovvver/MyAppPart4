@@ -1,7 +1,5 @@
 package com.example.myapppart3
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -39,6 +37,13 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             val user = User(name = name, age = 0) // Возраст не используется, поэтому ставим 0
             userRepository.insertUser(user)
+        }
+    }
+
+    fun updateUserCheckedStatus(user: User, isChecked: Boolean) {
+        viewModelScope.launch {
+            user.isChecked = isChecked
+            userRepository.updateUser(user)
         }
     }
 }

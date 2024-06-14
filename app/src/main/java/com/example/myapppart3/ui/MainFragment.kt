@@ -6,19 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapppart3.ItemAdapter
 import com.example.myapppart3.databinding.FragmentMainBinding
 import com.example.myapppart3.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class MainFragment : Fragment() {
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels(ownerProducer = { this })
     private lateinit var itemAdapter: ItemAdapter
 
     @SuppressLint("NotifyDataSetChanged")
@@ -30,15 +30,18 @@ class MainFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        itemAdapter = ItemAdapter(emptyList())
+        itemAdapter = ItemAdapter(emptyList()) { user, isChecked ->
+            viewModel.updateUserCheckedStatus(user, isChecked)
+        }
         binding.itemList.layoutManager = LinearLayoutManager(requireContext())
         binding.itemList.adapter = itemAdapter
 
         viewModel.users.observe(viewLifecycleOwner) { users ->
-            itemAdapter.items = users.map { it.name }
+            itemAdapter.items = users // Теперь передаем список User
             itemAdapter.notifyDataSetChanged()
         }
 
@@ -50,7 +53,7 @@ class MainFragment : Fragment() {
     private fun showInputDialog() {
         val inputDialog = InputDialog(requireContext())
         inputDialog.show { inputText ->
-            viewModel.addItem(inputText)
+            viewModel.addUser(inputText) // Используем addUser()
         }
     }
 
