@@ -2,12 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/calculate_fragment"
+        android:id="@+id/home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/home" />
+
+    <item
+        android:id="@+id/calculate"
         android:icon="@drawable/ic_calculate"
         android:title="@string/calculate" />
 
     <item
-        android:id="@+id/settings_fragment"
+        android:id="@+id/settings"
         android:icon="@drawable/ic_settings"
         android:title="@string/settings" />
 
