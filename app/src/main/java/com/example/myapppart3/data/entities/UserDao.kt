@@ -1,6 +1,7 @@
 package com.example.myapppart3.data.entities
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -18,4 +19,7 @@ interface UserDao {
 
     @Update
     suspend fun updateUser(user: User)
+
+    @Delete // Добавляем аннотацию @Delete
+    suspend fun deleteUser(user: User)
 }

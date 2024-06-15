@@ -23,7 +23,7 @@ object AppModule {
         return Room.databaseBuilder(
             context,
             AppDatabase::class.java,
-            "user_database3"
+            "user_database4"
         ).build()
     }
 
@@ -39,6 +39,11 @@ object AppModule {
 
     @Provides
     fun provideItemAdapter(): ItemAdapter {
-        return ItemAdapter(emptyList(), onUserCheckedChangeListener = { _, _ ->  })
+        return ItemAdapter(emptyList(),
+            onUserCheckedChangeListener = { _, _ ->  },
+            onEditClickListener = { _ -> },
+            onDeleteClickListener = { _ -> }
+
+        )
     }
 }

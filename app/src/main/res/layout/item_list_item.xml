@@ -27,32 +27,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/edit"
-
-            android:scaleX="2"
-            android:scaleY="2"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="10dp"
-            android:background="?android:attr/selectableItemBackgroundBorderless" />
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            app:tint="@color/GreenLight" />
 
         <ImageButton
             android:id="@+id/delete_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/delete"
-
-            android:scaleX="2"
-            android:scaleY="2"
+            android:backgroundTint="@color/RedLight"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
             android:layout_marginEnd="10dp"
             android:layout_marginStart="20dp"
-            android:background="?android:attr/selectableItemBackgroundBorderless" />
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            app:tint="@color/RedLight"/>
 
         <CheckBox
             android:id="@+id/checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:scaleX="2"
-            android:scaleY="2"
+            android:scaleX="1"
+            android:scaleY="1"
             />
 
     </LinearLayout>

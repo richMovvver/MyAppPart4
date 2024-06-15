@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapppart3.ItemAdapter
 import com.example.myapppart3.databinding.FragmentMainBinding
 import com.example.myapppart3.MainViewModel
+import com.example.myapppart3.data.entities.User
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,9 +35,16 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        itemAdapter = ItemAdapter(emptyList()) { user, isChecked ->
-            viewModel.updateUserCheckedStatus(user, isChecked)
-        }
+        itemAdapter = ItemAdapter(emptyList(),
+            onUserCheckedChangeListener = { user, isChecked ->
+                viewModel.updateUserCheckedStatus(user, isChecked)
+            },
+            onEditClickListener = { user ->
+                showEditDialog(user)
+            },
+            onDeleteClickListener = { user ->
+                viewModel.deleteUser(user)
+            })
         binding.itemList.layoutManager = LinearLayoutManager(requireContext())
         binding.itemList.adapter = itemAdapter
 
@@ -54,6 +62,14 @@ class MainFragment : Fragment() {
         val inputDialog = InputDialog(requireContext())
         inputDialog.show { inputText ->
             viewModel.addUser(inputText) // Используем addUser()
+        }
+    }
+
+    private fun showEditDialog(user: User) {
+        // ... (реализуйте диалоговое окно для редактирования пользователя)
+        val inputDialog = InputDialog(requireContext())
+        inputDialog.show { newUserName ->
+            viewModel.updateUser(user, newUserName)
         }
     }
 

@@ -22,5 +22,11 @@ class UserRepository(private val userDao: UserDao) {
         }
     }
 
+    suspend fun deleteUser(user: User) {
+        withContext(Dispatchers.IO) {
+            userDao.deleteUser(user)
+        }
+    }
+
 
 }

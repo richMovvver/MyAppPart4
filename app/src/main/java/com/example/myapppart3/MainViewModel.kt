@@ -46,4 +46,17 @@ class MainViewModel @Inject constructor(
             userRepository.updateUser(user)
         }
     }
+
+    fun deleteUser(user: User) {
+        viewModelScope.launch {
+            userRepository.deleteUser(user)
+        }
+    }
+
+    fun updateUser(user: User, newName: String) {
+        viewModelScope.launch {
+            user.name = newName // Изменение имени пользователя
+            userRepository.updateUser(user)
+        }
+    }
 }
